@@ -1,0 +1,64 @@
+:root {
+  /* --- Merk: ROF-rooi --- */
+  --rof-red-50: #FDF6F5;
+  --rof-red-100: #F7DDDE;
+  --rof-red-300: #E8918F;
+  --rof-red-500: #C41E2A; /* amptelike ROF-rooi */
+  --rof-red-600: #A81722;
+  --rof-red-700: #8F1420;
+
+  /* --- Neutrale: houtskool --- */
+  --charcoal-900: #1C1B19;
+  --charcoal-800: #2A2825;
+  --charcoal-700: #3E3A34;
+  --charcoal-600: #4A463F;
+  --charcoal-500: #57534B;
+
+  /* --- Neutrale: warm grys & romerig --- */
+  --warm-400: #8A857C;
+  --warm-300: #A39C8E;
+  --warm-200: #C9C2B4;
+  --line-strong: #D6CFC0;
+  --line: #E0DACD;
+  --line-soft: #EFEAE0;
+  --cream-50: #F9F7F2;
+  --cream-100: #F4F0E8; /* standaard bladsy-agtergrond */
+  --cream-200: #EFEAE0;
+  --cream-300: #E8E2D6;
+  --white: #FFFFFF;
+
+  /* --- Beperkte aksente --- */
+  --gold-500: #C9A227;   /* mylstene, prestasies */
+  --green-600: #2F7A4F;  /* sukses, goedgekeur */
+  --navy-800: #1B3A5B;   /* net verslae & datavisualisering */
+  --danger-600: #B3261E; /* vormfoute */
+
+  /* --- Semantiese aliasse --- */
+  --accent: var(--rof-red-500);
+  --accent-hover: var(--rof-red-700);
+  --accent-soft: var(--rof-red-50);
+
+  --text-strong: var(--charcoal-900);
+  --text-body: var(--charcoal-700);
+  --text-muted: var(--warm-400);
+  --text-on-accent: var(--white);
+  --text-on-inverse: var(--cream-100);
+  --text-link: var(--rof-red-500);
+  --text-link-hover: var(--rof-red-700);
+
+  --surface-page: var(--cream-100);
+  --surface-page-alt: var(--cream-50);
+  --surface-card: var(--white);
+  --surface-sunken: var(--cream-200);
+  --surface-inverse: var(--charcoal-900);
+  --surface-accent: var(--rof-red-500);
+  --surface-disabled: var(--cream-300);
+
+  --border-default: var(--line);
+  --border-soft: var(--line-soft);
+  --border-strong: var(--charcoal-900);
+  --border-field: var(--line-strong);
+  --border-error: var(--danger-600);
+
+  --focus-ring: 0 0 0 3px rgba(196, 30, 42, 0.28);
+}

@@ -1,0 +1,7 @@
+:root {
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 4px;   /* standaard kaart-radius */
+  --radius-lg: 8px;
+  --radius-pill: 999px; /* alle knoppies */
+}

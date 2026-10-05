@@ -1,0 +1,36 @@
+/* Basisstyle — direk uit die ROF UI-kit-bundel. */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--text-strong);
+  font-family: var(--font-sans);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-lh);
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-heading);
+  margin: 0;
+}
+h1 { font-size: var(--text-h1); line-height: var(--text-h1-lh); }
+h2 { font-size: var(--text-h2); line-height: var(--text-h2-lh); }
+h3 { font-size: var(--text-h3); line-height: var(--text-h3-lh); }
+
+a { color: var(--text-link); text-decoration: none; }
+a:hover { color: var(--text-link-hover); }
+
+::selection { background: var(--accent); color: var(--text-on-accent); }
+
+.rof-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}

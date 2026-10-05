@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Rapport Onderwysfonds</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="_ds/rof-design-system-d4b3363f-b89a-4555-ae01-ffee231b57e8/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/rof-design-system-d4b3363f-b89a-4555-ae01-ffee231b57e8/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/rof-design-system-d4b3363f-b89a-4555-ae01-ffee231b57e8/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/rof-design-system-d4b3363f-b89a-4555-ae01-ffee231b57e8/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/rof-design-system-d4b3363f-b89a-4555-ae01-ffee231b57e8/tokens/radius.css">
+  <link rel="stylesheet" href="_ds/rof-design-system-d4b3363f-b89a-4555-ae01-ffee231b57e8/tokens/elevation.css">
+  <link rel="stylesheet" href="_ds/rof-design-system-d4b3363f-b89a-4555-ae01-ffee231b57e8/tokens/motion.css">
+  <link rel="stylesheet" href="_ds/rof-design-system-d4b3363f-b89a-4555-ae01-ffee231b57e8/tokens/base.css">
+  <link rel="stylesheet" href="_ds/rof-design-system-d4b3363f-b89a-4555-ae01-ffee231b57e8/styles.css">
+  <script src="_ds/rof-design-system-d4b3363f-b89a-4555-ae01-ffee231b57e8/_ds_bundle.js"></script>
+  <style>
+    html,body{margin:0;background:#F4F0E8;}
+    *{box-sizing:border-box;}
+    a{color:#C41E2A;text-decoration:none;}
+    a:hover{color:#8F1420;}
+  </style>
+</helmet>
+
+<div style="min-height:100vh;background:var(--surface-page);color:var(--text-body);font-family:var(--font-sans);">
+
+  <header style="position:sticky;top:0;z-index:40;background:rgba(255,255,255,0.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);">
+    <div style="max-width:1240px;margin:0 auto;padding:12px clamp(20px,4vw,32px);display:flex;align-items:center;gap:24px;">
+      <a href="#" onClick="{{ goTuis }}" style="display:flex;align-items:center;gap:10px;flex:none;color:var(--text-strong);">
+        <x-import component-from-global-scope="ROFDesignSystem_d4b336.Logo" variant="colour" width="{{ 110 }}" asset-base="assets" hint-size="110px,68px"></x-import>
+        <span style="font-family:var(--font-display);font-size:14px;line-height:1.15;font-weight:600;color:var(--text-strong);">Rapport<br>Onderwysfonds</span>
+      </a>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <nav style="display:flex;gap:22px;margin-left:auto;">
+          <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+            <a href="#" onClick="{{ n.onClick }}" style="font-size:14px;font-weight:600;padding:4px 0;color:{{ n.color }};border-bottom:2px solid {{ n.border }};">{{ n.label }}</a>
+          </sc-for>
+        </nav>
+        <div style="display:flex;gap:8px;">
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" size="sm" variant="primary" onClick="{{ goStudente }}" hint-size="120px,36px">Doen Aansoek</x-import>
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" size="sm" variant="secondary" onClick="{{ goDonateurs }}" hint-size="100px,36px">Skenk Nou</x-import>
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" size="sm" variant="tertiary" onClick="{{ goVennoot }}" hint-size="130px,36px">Word 'n Vennoot</x-import>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-left:auto;">
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" size="sm" variant="tertiary" onClick="{{ toggleMenu }}" hint-size="100px,40px">{{ menuLabel }}</x-import>
+        </div>
+      </sc-if>
+    </div>
+    <sc-if value="{{ showMobileMenu }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid var(--line);background:var(--white);padding:8px clamp(20px,4vw,32px) 24px;">
+        <nav style="display:flex;flex-direction:column;">
+          <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+            <a href="#" onClick="{{ n.onClick }}" style="font-size:17px;font-weight:600;padding:14px 0;border-bottom:1px solid var(--line-soft);color:{{ n.color }};">{{ n.label }}</a>
+          </sc-for>
+        </nav>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;">
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="primary" full-width="{{ true }}" onClick="{{ goStudente }}" hint-size="100%,48px">Doen Aansoek</x-import>
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="secondary" full-width="{{ true }}" onClick="{{ goDonateurs }}" hint-size="100%,48px">Skenk Nou</x-import>
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="tertiary" full-width="{{ true }}" onClick="{{ goVennoot }}" hint-size="100%,48px">Word 'n Vennoot</x-import>
+        </div>
+      </div>
+    </sc-if>
+  </header>
+
+  <!-- ================= TUIS ================= -->
+  <sc-if value="{{ isTuis }}" hint-placeholder-val="{{ true }}">
+    <main data-screen-label="01 Tuis">
+      <section style="position:relative;overflow:hidden;">
+        <div style="max-width:1240px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(20px,4vw,32px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:0 40px;align-items:center;">
+          <div style="padding-bottom:clamp(40px,6vw,72px);position:relative;z-index:1;">
+            <h1 style="font-family:var(--font-display);font-size:clamp(40px,6vw,68px);line-height:1.02;letter-spacing:-0.025em;color:var(--text-strong);margin:0 0 24px;text-wrap:balance;">Belê in Suid-Afrika se <em style="color:var(--accent);">volgende geslag onderwysers.</em></h1>
+            <p style="font-size:17px;line-height:1.65;max-width:52ch;margin:0 0 32px;color:var(--text-body);text-wrap:pretty;">Rapport Onderwysfonds bied volhoubare onderwysbefondsing wat verdienstelike studente bemagtig om as onderwysers te kwalifiseer — en donateurs en vennote in staat stel om blywende impak deur onderwys te skep.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;">
+              <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="primary" onClick="{{ goStudente }}" hint-size="150px,48px">Doen Aansoek</x-import>
+              <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="secondary" onClick="{{ goDonateurs }}" hint-size="130px,48px">Skenk Nou</x-import>
+              <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="tertiary" onClick="{{ goVennoot }}" hint-size="160px,48px">Word 'n Vennoot</x-import>
+            </div>
+          </div>
+          <div style="position:relative;display:flex;justify-content:flex-end;align-self:end;">
+            <img src="uploads/HERO-home-02-91eb6ce2.jpg" alt="Glimlaggende onderwyser in skoolbaadjie" style="display:block;width:calc(100% + clamp(0px,14vw,240px));max-width:none;margin-left:calc(-1 * clamp(0px,14vw,240px));margin-right:calc(-1 * clamp(0px,2vw,32px));height:auto;position:relative;left:50px;">
+          </div>
+        </div>
+      </section>
+
+      <section style="background:var(--surface-inverse);">
+        <div style="max-width:1240px;margin:0 auto;padding:36px clamp(20px,4vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:28px;text-align:center;">
+          <div><div style="font-family:var(--font-display);font-size:clamp(36px,4vw,48px);line-height:1;color:var(--accent);">60+</div><div style="font-size:14px;color:var(--cream-100);margin-top:8px;">jaar impak</div></div>
+          <div><div style="font-family:var(--font-display);font-size:clamp(36px,4vw,48px);line-height:1;color:var(--accent);">750+</div><div style="font-size:14px;color:var(--cream-100);margin-top:8px;">aansoeke per jaar</div></div>
+          <div><div style="font-family:var(--font-display);font-size:clamp(36px,4vw,48px);line-height:1;color:var(--accent);">500</div><div style="font-size:14px;color:var(--cream-100);margin-top:8px;">toekennings per jaar</div></div>
+          <div><div style="font-family:var(--font-display);font-size:clamp(36px,4vw,48px);line-height:1;color:var(--accent);">100%</div><div style="font-size:14px;color:var(--cream-100);margin-top:8px;">van die donasie gaan aan 'n lening</div></div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px) 0;">
+        <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);line-height:1.1;letter-spacing:-0.02em;color:var(--text-strong);margin:0 0 28px;">Waar <em style="color:var(--accent);">pas jy</em> in?</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px;">
+          <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:32px;display:flex;flex-direction:column;gap:12px;">
+            <div style="font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--text-strong);">Donateurs</div>
+            <p style="margin:0;font-size:15px;line-height:1.6;flex:1;">Skenk eenmalig of maandeliks en sien presies waarheen jou geld gaan.</p>
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.TextLink" onClick="{{ goDonateurs }}" href="#" hint-size="90px,20px">Meer Info</x-import>
+          </div>
+          <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:32px;display:flex;flex-direction:column;gap:12px;">
+            <div style="font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--text-strong);">Studente</div>
+            <p style="margin:0;font-size:15px;line-height:1.6;flex:1;">Vra aan vir 'n ROF-lening en laat finansies nie jou droom stop nie.</p>
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.TextLink" onClick="{{ goStudente }}" href="#" hint-size="90px,20px">Meer Info</x-import>
+          </div>
+          <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:32px;display:flex;flex-direction:column;gap:12px;">
+            <div style="font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--text-strong);">Vennote</div>
+            <p style="margin:0;font-size:15px;line-height:1.6;flex:1;">Belyn jou SVI-program, trust of stigting met 'n saak wat saak maak.</p>
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.TextLink" onClick="{{ goVennoot }}" href="#" hint-size="90px,20px">Meer Info</x-import>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px);text-align:center;">
+        <h2 style="font-family:var(--font-display);font-size:clamp(26px,3.4vw,34px);line-height:1.15;letter-spacing:-0.02em;color:var(--text-strong);margin:0 0 8px;">Volg ons <em style="color:var(--accent);">nuutste</em> nuus en stories</h2>
+        <p style="margin:0 0 24px;font-size:15px;">Ons kanale werk outomaties by met nuwe plasings.</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:32px;">
+          <sc-for list="{{ socialTabs }}" as="t" hint-placeholder-count="4">
+            <button type="button" onClick="{{ t.onClick }}" style="font-family:var(--font-sans);font-size:14px;font-weight:700;min-height:44px;padding:0 20px;border-radius:999px;cursor:pointer;transition:var(--transition-interactive);border:1.5px solid {{ t.border }};background:{{ t.bg }};color:{{ t.color }};">{{ t.label }}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ isFacebook }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;justify-content:center;">
+            <div style="width:100%;max-width:500px;background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden;">
+              <iframe title="Rapport Onderwysfonds op Facebook" src="{{ fbSrc }}" width="500" height="720" style="display:block;width:100%;height:720px;border:none;overflow:hidden;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ notFacebook }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:20px;">
+          <sc-for list="{{ socialPosts }}" as="p" hint-placeholder-count="4">
+            <div style="aspect-ratio:4/5;background-color:var(--white);background-image:repeating-linear-gradient(135deg, rgba(196,30,42,0.09) 0 10px, transparent 10px 20px);border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+              <span class="rof-label" style="background:var(--cream-100);padding:10px 14px;">{{ p }}</span>
+            </div>
+          </sc-for>
+        </div>
+        </sc-if>
+      </section>
+
+      <section style="background:var(--cream-300);">
+        <div style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,80px) clamp(20px,4vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:32px;align-items:center;">
+          <img src="uploads/Auxillary Ngaka.png" alt="Glimlaggende student met handboeke" style="display:block;width:100%;max-width:380px;height:auto;">
+          <div style="display:flex;flex-direction:column;align-items:flex-start;gap:16px;grid-column:span 2;min-width:0;">
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.Badge" tone="accent" hint-size="130px,24px">Studenteverhaal</x-import>
+            <div style="background:var(--cream-50);border:1px solid var(--line);border-radius:8px;padding:clamp(24px,3vw,36px);width:100%;">
+              <p style="font-family:var(--font-display);font-size:clamp(24px,3vw,34px);line-height:1.2;color:var(--text-strong);margin:0 0 16px;">"Ek is die eerste in my familie wat gaan <em style="color:var(--accent);">klaarmaak.</em>"</p>
+              <div class="rof-label" style="color:var(--text-muted);">Auxillary Ngaka - Trotse juffrou by Vredendal Sekondêre Skool</div>
+            </div>
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.TextLink" href="#" hint-size="140px,20px">Lees meer verhale</x-import>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px;">
+        <div style="grid-column:span 2;min-width:0;background:var(--surface-inverse);border-radius:8px;padding:clamp(28px,4vw,40px);display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;">
+          <h2 style="flex:1 1 100%;font-family:var(--font-display);font-size:clamp(28px,3.4vw,38px);line-height:1.12;letter-spacing:-0.02em;color:var(--white);margin:0;">Wanneer jy in 'n <em style="color:var(--accent);">toekomstige onderwyser belê</em>, belê jy in Suid-Afrika se toekoms.</h2>
+          <p style="flex:1 1 220px;margin:0;font-size:15px;line-height:1.6;color:var(--cream-100);">R500 per maand dek 'n jaar se handboeke vir een student. Jou bydrae is Artikel 18A-aftrekbaar.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="primary" onClick="{{ goDonateurs }}" hint-size="130px,48px">Skenk Nou</x-import>
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="inverse" onClick="{{ goVennoot }}" hint-size="160px,48px">Word 'n Vennoot</x-import>
+          </div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:clamp(28px,4vw,36px);display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+            <h2 style="font-family:var(--font-display);font-size:clamp(28px,3.4vw,36px);line-height:1.05;color:var(--text-strong);margin:0;">Bly op<br><em style="color:var(--accent);">hoogte</em></h2>
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.Logo" variant="colour" width="{{ 80 }}" asset-base="assets" hint-size="80px,50px"></x-import>
+          </div>
+          <p style="margin:0;font-size:15px;line-height:1.6;">Ontvang ROF nuus, studentestories en donateur-updates in jou inbox.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">
+            <div style="flex:1 1 180px;"><x-import component-from-global-scope="ROFDesignSystem_d4b336.Input" type="email" placeholder="jou@epos.co.za" hint-size="100%,44px"></x-import></div>
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="primary" hint-size="110px,44px">Skryf In</x-import>
+          </div>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <!-- ================= WIE IS ONS ================= -->
+  <sc-if value="{{ isWie }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="02 Wie is Ons">
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(20px,4vw,32px) 0;">
+        <div class="rof-label" style="color:var(--accent);margin-bottom:16px;">Sedert 2003</div>
+        <h1 style="font-family:var(--font-display);font-size:clamp(38px,5.5vw,60px);line-height:1.04;letter-spacing:-0.025em;color:var(--text-strong);margin:0 0 28px;max-width:18ch;text-wrap:balance;">Van 'n nederige begin tot 'n <em style="color:var(--accent);">belangrike rolspeler</em></h1>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px 48px;">
+          <p style="margin:0;font-size:17px;line-height:1.7;text-wrap:pretty;">Rapport Onderwysfonds (ROF) is 'n nie-winsgewende organisasie (NPO 041-391) wat tersiêre onderwysstudente finansieel bystaan met lenings. Die Fonds bestaan al sedert November 2003 en het oor die jare reeds honderde studente gehelp om hul droom om 'n onderwyser te word, te bewaarheid. Daar word jaarliks meer as 750 aansoeke ontvang, met ongeveer 500 wat vir 'n toekenning kwalifiseer.</p>
+          <p style="margin:0;font-size:17px;line-height:1.7;text-wrap:pretty;">ROF is Suid-Afrika se vertroude organisasie wat in toekomstige onderwysers belê — met meer as ses dekades se ervaring en 'n volhoubare befondsingsmodel wat blywende opvoedkundige impak skep.</p>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px) 0;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
+          <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);line-height:1.1;letter-spacing:-0.02em;color:var(--text-strong);margin:0;">Ons storie — <em style="color:var(--accent);">2003 tot vandag</em></h2>
+          <div style="display:flex;gap:8px;">
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.IconButton" label="Vorige" variant="outline" onClick="{{ tlPrev }}" hint-size="44px,44px">←</x-import>
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.IconButton" label="Volgende" variant="outline" onClick="{{ tlNext }}" hint-size="44px,44px">→</x-import>
+          </div>
+        </div>
+        <div ref="{{ tlRef }}" style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:12px;">
+          <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="4">
+            <div style="flex:0 0 min(80%,320px);scroll-snap-align:start;background:var(--white);border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:8px;padding:28px;min-height:200px;display:flex;flex-direction:column;gap:14px;">
+              <div style="font-family:var(--font-display);font-size:34px;line-height:1;color:var(--accent);">{{ t.year }}</div>
+              <p style="margin:0;font-size:15.5px;line-height:1.6;color:var(--text-body);">{{ t.text }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px) 0;">
+        <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);line-height:1.1;letter-spacing:-0.02em;color:var(--text-strong);margin:0 0 24px;">Waarvoor <em style="color:var(--accent);">ons staan</em></h2>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <div style="font-family:var(--font-display);font-size:22px;color:var(--text-strong);background:var(--white);border:1px solid var(--line);border-radius:8px;padding:18px 28px;">Betroubaar</div>
+          <div style="font-family:var(--font-display);font-size:22px;color:var(--text-strong);background:var(--white);border:1px solid var(--line);border-radius:8px;padding:18px 28px;">Modern</div>
+          <div style="font-family:var(--font-display);font-size:22px;color:var(--text-strong);background:var(--white);border:1px solid var(--line);border-radius:8px;padding:18px 28px;">Innoverend</div>
+          <div style="font-family:var(--font-display);font-size:22px;color:var(--text-strong);background:var(--white);border:1px solid var(--line);border-radius:8px;padding:18px 28px;">Professioneel</div>
+          <div style="font-family:var(--font-display);font-size:22px;color:var(--text-strong);background:var(--white);border:1px solid var(--line);border-radius:8px;padding:18px 28px;">Maklik om te gebruik</div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px) 0;">
+        <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);line-height:1.1;letter-spacing:-0.02em;color:var(--text-strong);margin:0 0 24px;">Leierskap &amp; <em style="color:var(--accent);">direksie</em></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px;">
+          <sc-for list="{{ team }}" as="m" hint-placeholder-count="3">
+            <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden;">
+              <div style="aspect-ratio:4/3;background-color:var(--cream-200);background-image:repeating-linear-gradient(135deg, rgba(196,30,42,0.09) 0 10px, transparent 10px 20px);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);">
+                <span class="rof-label" style="background:var(--cream-100);padding:10px 14px;">Portret · 4:3</span>
+              </div>
+              <div style="padding:22px 24px 26px;">
+                <div style="font-size:17px;font-weight:800;color:var(--text-strong);">{{ m.name }}</div>
+                <div class="rof-label" style="color:var(--text-muted);margin-top:6px;">{{ m.role }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px);">
+        <div style="background:var(--surface-inverse);border-radius:8px;padding:clamp(28px,4vw,44px);display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;">
+          <h2 style="font-family:var(--font-display);font-size:clamp(26px,3.2vw,36px);line-height:1.15;color:var(--white);margin:0;max-width:22ch;">Help ons om nog 'n geslag onderwysers te <em style="color:var(--accent);">bemagtig.</em></h2>
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="primary" size="lg" onClick="{{ goDonateurs }}" hint-size="210px,52px">Ondersteun Ons Missie</x-import>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <!-- ================= DONATEURS ================= -->
+  <sc-if value="{{ isDonateurs }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="03 Donateurs">
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(20px,4vw,32px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:40px;align-items:center;">
+        <div>
+          <div class="rof-label" style="color:var(--accent);margin-bottom:16px;">Hoekom skenk</div>
+          <h1 style="font-family:var(--font-display);font-size:clamp(40px,6vw,64px);line-height:1.02;letter-spacing:-0.025em;color:var(--text-strong);margin:0 0 24px;">Jou skenking, <em style="color:var(--accent);">hul toekoms</em></h1>
+          <p style="font-size:17px;line-height:1.7;max-width:52ch;margin:0 0 28px;text-wrap:pretty;">Wanneer jy aan ROF skenk, ondersteun jy nie net één student nie — jy word deel van 'n volhoubare kringloop wat geslag ná geslag onderwysers bemagtig. 100% van elke skenking word aangewend vir 'n ROF-lening.</p>
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="primary" onClick="{{ goSkenk }}" hint-size="130px,48px">Skenk Nou</x-import>
+        </div>
+        <div style="aspect-ratio:5/4;background-color:var(--cream-200);background-image:repeating-linear-gradient(135deg, rgba(196,30,42,0.09) 0 10px, transparent 10px 20px);border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+          <span class="rof-label" style="background:var(--cream-100);padding:10px 16px;">Donateur- / impakbeeld · 5:4</span>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px) 0;">
+        <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);line-height:1.1;letter-spacing:-0.02em;color:var(--text-strong);margin:0 0 24px;">Hoekom <em style="color:var(--accent);">ROF?</em></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;">
+          <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="7">
+            <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:26px;display:flex;flex-direction:column;gap:12px;">
+              <span class="rof-label" style="color:var(--accent);">{{ b.n }}</span>
+              <p style="margin:0;font-size:15.5px;line-height:1.6;color:var(--text-strong);">{{ b.text }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section ref="{{ skenkRef }}" style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px) 0;scroll-margin-top:80px;">
+        <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);line-height:1.1;letter-spacing:-0.02em;color:var(--text-strong);margin:0 0 8px;">Skenk <em style="color:var(--accent);">nou</em></h2>
+        <p style="margin:0 0 24px;font-size:15.5px;">Kies hoe jy wil skenk.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-bottom:16px;">
+          <sc-for list="{{ donateOpts }}" as="o" hint-placeholder-count="4">
+            <button type="button" onClick="{{ o.onClick }}" aria-pressed="{{ o.active }}" style="text-align:left;font-family:var(--font-sans);cursor:pointer;border-radius:8px;padding:20px 22px;min-height:88px;transition:var(--transition-interactive);border:1.5px solid {{ o.border }};background:{{ o.bg }};color:{{ o.color }};">
+              <div style="font-size:16px;font-weight:800;margin-bottom:4px;">{{ o.title }}</div>
+              <div style="font-size:14px;line-height:1.5;">{{ o.sub }}</div>
+            </button>
+          </sc-for>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:clamp(24px,3vw,36px);">
+          <sc-if value="{{ showPortal }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;">
+              <div style="max-width:56ch;">
+                <div style="font-family:var(--font-display);font-size:26px;color:var(--text-strong);margin-bottom:8px;">{{ portalTitle }}</div>
+                <p style="margin:0;font-size:15.5px;line-height:1.6;">{{ portalText }}</p>
+              </div>
+              <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="primary" size="lg" hint-size="150px,52px">Doneer Nou</x-import>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isEft }}" hint-placeholder-val="{{ false }}">
+            <div style="font-family:var(--font-display);font-size:26px;color:var(--text-strong);margin-bottom:16px;">Bankbesonderhede</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px;">
+              <div style="background:var(--cream-50);border:1px solid var(--line);border-radius:4px;padding:16px;"><div class="rof-label" style="color:var(--text-muted);margin-bottom:6px;">Bank</div><div style="font-size:17px;font-weight:700;color:var(--text-strong);">Absa</div></div>
+              <div style="background:var(--cream-50);border:1px solid var(--line);border-radius:4px;padding:16px;"><div class="rof-label" style="color:var(--text-muted);margin-bottom:6px;">Takkode</div><div style="font-size:17px;font-weight:700;color:var(--text-strong);">632 005</div></div>
+              <div style="background:var(--cream-50);border:1px solid var(--line);border-radius:4px;padding:16px;"><div class="rof-label" style="color:var(--text-muted);margin-bottom:6px;">Rek.</div><div style="font-size:17px;font-weight:700;color:var(--text-strong);">405 864 6741</div></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isSnap }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:center;">
+              <div style="width:160px;aspect-ratio:1/1;background-color:var(--cream-200);background-image:repeating-linear-gradient(135deg, rgba(196,30,42,0.09) 0 10px, transparent 10px 20px);border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;"><span class="rof-label" style="background:var(--cream-100);padding:8px 10px;">QR-kode</span></div>
+              <div style="max-width:44ch;">
+                <div style="font-family:var(--font-display);font-size:26px;color:var(--text-strong);margin-bottom:8px;">Snapscan</div>
+                <p style="margin:0;font-size:15.5px;line-height:1.6;">Skandeer om direk vanaf jou selfoon te skenk.</p>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+        <p style="margin:16px 0 0;font-size:14px;line-height:1.6;color:var(--text-body);">ROF het Artikel 18A-belastingvrystelling — jou skenking is belastingaftrekbaar. Kontak <a href="mailto:finansies@rof.org.za" style="font-weight:700;">Finansies@rof.org.za</a> vir jou sertifikaat.</p>
+      </section>
+
+      <section ref="{{ vennootRef }}" style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px) 0;scroll-margin-top:80px;">
+        <div style="background:var(--surface-inverse);border-radius:8px;padding:clamp(28px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:28px;align-items:center;">
+          <div>
+            <h2 style="font-family:var(--font-display);font-size:clamp(28px,3.4vw,38px);line-height:1.12;color:var(--white);margin:0 0 14px;">Word 'n <em style="color:var(--accent);">korporatiewe vennoot</em></h2>
+            <p style="margin:0;font-size:16px;line-height:1.65;color:var(--cream-100);max-width:50ch;">Is jou onderneming op soek na 'n saak wat regtig saak maak? Vennoot met ROF deur jou korporatiewe SVI-program, trust of stigting.</p>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-start;">
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="primary" hint-size="160px,48px">Word 'n Vennoot</x-import>
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="inverse" hint-size="240px,48px">Laai Vennootskap-brosjure Af</x-import>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:32px;align-items:center;">
+        <div style="aspect-ratio:1/1;max-width:340px;width:100%;background-color:var(--cream-200);background-image:repeating-linear-gradient(135deg, rgba(196,30,42,0.09) 0 10px, transparent 10px 20px);border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+          <span class="rof-label" style="background:var(--cream-100);padding:10px 16px;">Donateurfoto · 1:1</span>
+        </div>
+        <div style="grid-column:span 2;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:16px;">
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Badge" tone="accent" hint-size="120px,24px">Getuigskrif</x-import>
+          <p style="font-family:var(--font-display);font-size:clamp(22px,2.8vw,30px);line-height:1.25;color:var(--text-strong);margin:0;">"[Getuigskrif van 'n donateur of vennoot oor hoe hulle skenking studente se lewens verander het.]"</p>
+          <div class="rof-label" style="color:var(--text-muted);">[Naam · Organisasie]</div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px);">
+        <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:clamp(24px,3vw,36px);display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;">
+          <div>
+            <h2 style="font-family:var(--font-display);font-size:clamp(26px,3vw,32px);line-height:1.1;color:var(--text-strong);margin:0 0 6px;">Bly op <em style="color:var(--accent);">hoogte</em></h2>
+            <p style="margin:0;font-size:15px;">Ontvang impakverslae en donateur-updates.</p>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;flex:0 1 440px;">
+            <div style="flex:1 1 200px;"><x-import component-from-global-scope="ROFDesignSystem_d4b336.Input" type="email" placeholder="jou@epos.co.za" hint-size="100%,44px"></x-import></div>
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="primary" hint-size="110px,44px">Skryf In</x-import>
+          </div>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <!-- ================= STUDENTE ================= -->
+  <sc-if value="{{ isStudente }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="04 Studente">
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(20px,4vw,32px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:40px;align-items:center;">
+        <div>
+          <div class="rof-label" style="color:var(--accent);margin-bottom:16px;">Vir studente</div>
+          <h1 style="font-family:var(--font-display);font-size:clamp(40px,6vw,64px);line-height:1.02;letter-spacing:-0.025em;color:var(--text-strong);margin:0 0 24px;">Het jy 'n <em style="color:var(--accent);">passie vir onderwys?</em></h1>
+          <p style="font-size:17px;line-height:1.7;max-width:52ch;margin:0 0 28px;text-wrap:pretty;">As jy weet nie waar die geld vandaan gaan kom om jou droom te verwesenlik nie, is ROF die plek vir jou. Ons ondersteun voltydse — en in sekere gevalle deeltydse — onderwysstudente met lenings, sodat finansies nooit die rede is waarom jy nie kwalifiseer nie.</p>
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="primary" hint-size="150px,48px">Doen Aansoek</x-import>
+        </div>
+        <div style="aspect-ratio:5/4;background-color:var(--cream-200);background-image:repeating-linear-gradient(135deg, rgba(196,30,42,0.09) 0 10px, transparent 10px 20px);border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+          <span class="rof-label" style="background:var(--cream-100);padding:10px 16px;">Studentebeeld · 5:4</span>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px) 0;">
+        <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);line-height:1.1;letter-spacing:-0.02em;color:var(--text-strong);margin:0 0 24px;">Wie mag <em style="color:var(--accent);">aansoek doen?</em></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;">
+          <sc-for list="{{ eligibility }}" as="e" hint-placeholder-count="4">
+            <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:24px;display:flex;gap:14px;align-items:flex-start;">
+              <span style="flex:none;width:28px;height:28px;border-radius:999px;background:var(--accent);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;">✓</span>
+              <p style="margin:0;font-size:15.5px;line-height:1.6;color:var(--text-strong);">{{ e }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:18px 0 0;font-size:14.5px;line-height:1.6;max-width:70ch;">Voorkeur word gegee aan Afrikaanssprekende studente, ongeag die taal waarin die kursus by die betrokke instelling aangebied word.</p>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px) 0;">
+        <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);line-height:1.1;letter-spacing:-0.02em;color:var(--text-strong);margin:0 0 24px;">Hoe om <em style="color:var(--accent);">aansoek te doen</em></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:16px;">
+          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.StepCard" step="{{ s.n }}" title="{{ s.title }}" hint-size="100%,180px">{{ s.text }}</x-import>
+          </sc-for>
+        </div>
+        <div style="margin-top:24px;">
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="primary" size="lg" iconAfter="→" hint-size="200px,52px">Doen Aansoek Nou</x-import>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px 48px;">
+        <div>
+          <div class="rof-label" style="color:var(--accent);margin-bottom:12px;">Gereelde vrae</div>
+          <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);line-height:1.1;letter-spacing:-0.02em;color:var(--text-strong);margin:0;">Het jy <em style="color:var(--accent);">vrae?</em></h2>
+        </div>
+        <div style="grid-column:span 2;min-width:0;display:flex;flex-direction:column;gap:10px;">
+          <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="3">
+            <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;">
+              <button type="button" onClick="{{ f.onClick }}" aria-expanded="{{ f.open }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;background:none;border:none;cursor:pointer;padding:20px 24px;min-height:44px;font-family:var(--font-sans);font-size:16px;font-weight:800;color:var(--text-strong);">
+                <span>{{ f.q }}</span>
+                <span style="flex:none;font-size:22px;font-weight:400;color:var(--accent);line-height:1;">{{ f.sign }}</span>
+              </button>
+              <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+                <p style="margin:0;padding:0 24px 22px;font-size:15.5px;line-height:1.65;color:var(--text-body);">{{ f.a }}</p>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px);">
+        <div style="background:var(--cream-300);border:1px solid var(--line);border-radius:8px;padding:clamp(24px,3vw,36px);display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;">
+          <div style="max-width:60ch;">
+            <h2 style="font-family:var(--font-display);font-size:clamp(24px,3vw,30px);line-height:1.15;color:var(--text-strong);margin:0 0 8px;">Studenteportaal</h2>
+            <p style="margin:0;font-size:15.5px;line-height:1.6;">Meld veilig aan om jou aansoek se vordering te volg, dokumente op te laai en direk met ROF te kommunikeer.</p>
+          </div>
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="secondary" hint-size="110px,48px">Meld Aan</x-import>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <!-- ================= KONTAK ONS ================= -->
+  <sc-if value="{{ isKontak }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="05 Kontak Ons">
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(20px,4vw,32px) 0;">
+        <div class="rof-label" style="color:var(--accent);margin-bottom:16px;">Kontak ons</div>
+        <h1 style="font-family:var(--font-display);font-size:clamp(40px,6vw,64px);line-height:1.02;letter-spacing:-0.025em;color:var(--text-strong);margin:0 0 16px;">Kom ons <em style="color:var(--accent);">gesels.</em></h1>
+        <p style="font-size:17px;line-height:1.7;max-width:56ch;margin:0 0 36px;">Het jy 'n vraag oor aansoeke, skenkings of vennootskappe? Ons hoor graag van jou.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px;">
+          <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:18px;">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:18px;">
+              <x-import component-from-global-scope="ROFDesignSystem_d4b336.Input" label="Naam" required="{{ true }}" hint-size="100%,72px"></x-import>
+              <x-import component-from-global-scope="ROFDesignSystem_d4b336.Input" label="E-posadres" type="email" required="{{ true }}" hint-size="100%,72px"></x-import>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:18px;">
+              <x-import component-from-global-scope="ROFDesignSystem_d4b336.Input" label="Telefoonnommer" type="tel" hint-size="100%,72px"></x-import>
+              <x-import component-from-global-scope="ROFDesignSystem_d4b336.Select" label="Tipe navraag" options="{{ enquiryTypes }}" hint-size="100%,72px"></x-import>
+            </div>
+            <x-import component-from-global-scope="ROFDesignSystem_d4b336.Input" label="Boodskap" multiline="{{ true }}" rows="{{ 5 }}" hint-size="100%,150px"></x-import>
+            <div><x-import component-from-global-scope="ROFDesignSystem_d4b336.Button" variant="primary" iconAfter="→" hint-size="170px,48px">Stuur Navraag</x-import></div>
+          </div>
+          <div style="min-height:320px;background-color:var(--cream-200);background-image:repeating-linear-gradient(135deg, rgba(196,30,42,0.09) 0 10px, transparent 10px 20px);border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <span class="rof-label" style="background:var(--cream-100);padding:10px 16px;">Kaart · kantoorligging</span>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px) 0;">
+        <h2 style="font-family:var(--font-display);font-size:clamp(30px,4vw,40px);line-height:1.1;letter-spacing:-0.02em;color:var(--text-strong);margin:0 0 24px;">Direkte <em style="color:var(--accent);">kontakte</em></h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;">
+          <sc-for list="{{ directContacts }}" as="c" hint-placeholder-count="4">
+            <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:26px;display:flex;flex-direction:column;gap:8px;">
+              <span class="rof-label" style="color:var(--accent);">{{ c.dept }}</span>
+              <div style="font-size:17px;font-weight:800;color:var(--text-strong);">{{ c.name }}</div>
+              <div style="font-size:15px;line-height:1.6;">{{ c.detail }}</div>
+              <div style="font-size:13.5px;color:var(--text-muted);margin-top:4px;">{{ c.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,88px) clamp(20px,4vw,32px);">
+        <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:clamp(24px,3vw,36px);display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;">
+          <div>
+            <h2 style="font-family:var(--font-display);font-size:clamp(24px,3vw,30px);line-height:1.15;color:var(--text-strong);margin:0 0 8px;">Sosiale media &amp; kantoorure</h2>
+            <p style="margin:0;font-size:15.5px;">[Kantoorure in te vul]</p>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <a href="#" aria-label="Facebook" style="width:44px;height:44px;border-radius:999px;border:1.5px solid var(--charcoal-900);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--text-strong);">f</a>
+            <a href="#" aria-label="LinkedIn" style="width:44px;height:44px;border-radius:999px;border:1.5px solid var(--charcoal-900);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--text-strong);">in</a>
+            <a href="#" aria-label="Instagram" style="width:44px;height:44px;border-radius:999px;border:1.5px solid var(--charcoal-900);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--text-strong);">ig</a>
+            <a href="#" aria-label="WhatsApp" style="width:44px;height:44px;border-radius:999px;border:1.5px solid var(--charcoal-900);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--text-strong);">wa</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <footer style="background:var(--surface-inverse);color:var(--cream-100);">
+    <div style="max-width:1240px;margin:0 auto;padding:clamp(48px,6vw,64px) clamp(20px,4vw,32px) 28px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:36px;">
+        <div>
+          <x-import component-from-global-scope="ROFDesignSystem_d4b336.Logo" variant="colour" width="{{ 90 }}" asset-base="assets" hint-size="90px,56px"></x-import>
+          <p style="margin:16px 0 0;font-size:14px;line-height:1.6;color:var(--cream-100);max-width:30ch;">Rapport Onderwysfonds belê sedert 2003 in Suid-Afrika se volgende geslag onderwysers.</p>
+        </div>
+        <div>
+          <div style="font-family:var(--font-display);font-size:17px;color:var(--white);margin-bottom:14px;">Kontak per afdeling</div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;">
+            <sc-for list="{{ footer.contacts }}" as="c" hint-placeholder-count="4">
+              <div style="color:var(--warm-200);">{{ c.label }}<a href="{{ c.href }}" style="color:var(--white);text-decoration:underline;">{{ c.email }}</a></div>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-display);font-size:17px;color:var(--white);margin-bottom:14px;">Vinnige skakels</div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;">
+            <sc-for list="{{ footer.links }}" as="l" hint-placeholder-count="4">
+              <a href="#" onClick="{{ l.onClick }}" style="color:var(--cream-100);">{{ l.label }}</a>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-display);font-size:17px;color:var(--white);margin-bottom:14px;">Geregistreer</div>
+          <div style="display:inline-flex;flex-direction:column;gap:4px;border:1px solid var(--charcoal-500);border-radius:4px;padding:12px 14px;font-size:13.5px;color:var(--cream-100);">
+            <sc-for list="{{ footer.reg }}" as="r" hint-placeholder-count="3">
+              <span>{{ r }}</span>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:16px;">
+            <a href="#" aria-label="Facebook" style="width:44px;height:44px;border-radius:999px;border:1px solid var(--charcoal-500);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;color:var(--cream-100);">f</a>
+            <a href="#" aria-label="LinkedIn" style="width:44px;height:44px;border-radius:999px;border:1px solid var(--charcoal-500);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;color:var(--cream-100);">in</a>
+            <a href="#" aria-label="Instagram" style="width:44px;height:44px;border-radius:999px;border:1px solid var(--charcoal-500);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;color:var(--cream-100);">ig</a>
+            <a href="#" aria-label="WhatsApp" style="width:44px;height:44px;border-radius:999px;border:1px solid var(--charcoal-500);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;color:var(--cream-100);">wa</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:44px;padding-top:20px;border-top:1px solid var(--charcoal-600);font-size:13px;color:var(--warm-300);">© 2026 Rapport Onderwysfonds. Alle regte voorbehou.</div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { page: 'tuis', menuOpen: false, faq: 0, donate: 'eenmalig', social: 'Facebook', w: typeof window !== 'undefined' ? window.innerWidth : 1280 };
+  tlRef = React.createRef();
+  skenkRef = React.createRef();
+  vennootRef = React.createRef();
+
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this.onResize);
+    const h = (location.hash || '').slice(1);
+    if (['tuis','wie','donateurs','studente','kontak'].includes(h)) this.setState({ page: h });
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+
+  go(page, ref) {
+    return (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      this.setState({ page, menuOpen: false }, () => {
+        try { history.replaceState(null, '', '#' + page); } catch (_) {}
+        const el = ref && ref.current;
+        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+        else window.scrollTo(0, 0);
+      });
+    };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const isMobile = s.w < 1100;
+    const NAV = [['tuis','Tuis'],['wie','Wie is Ons'],['donateurs','Donateurs'],['studente','Studente'],['kontak','Kontak Ons']];
+    const navItems = NAV.map(([id, label]) => ({
+      label, onClick: this.go(id),
+      color: s.page === id ? 'var(--accent)' : 'var(--charcoal-700)',
+      border: s.page === id ? 'var(--accent)' : 'transparent'
+    }));
+    const link = (id) => ({ label: NAV.find(n => n[0] === id)[1], onClick: this.go(id) });
+    const mail = (label, email) => ({ label: label ? label + ': ' : '', email, href: 'mailto:' + email.toLowerCase() });
+    const bem = mail('Bemarking', 'Bemarking@rof.org.za');
+    const FOOT = {
+      tuis: { contacts: [mail('Administrasie','Admin@rof.org.za'), mail('Finansies','Finansies@rof.org.za'), mail('Skenkings','Charl@rof.org.za'), bem], links: ['tuis','wie','donateurs','studente','kontak'], reg: ['NPO 041-391','NCRCP 3885','Artikel 18A geregistreer'] },
+      wie: { contacts: [mail('', 'Admin@rof.org.za'), bem], links: ['tuis','donateurs','studente'], reg: ['NPO 041-391','NCRCP 3885'] },
+      donateurs: { contacts: [mail('', 'Finansies@rof.org.za'), bem], links: ['tuis','wie','studente'], reg: ['NPO 041-391','NCRCP 3885','Artikel 18A'] },
+      studente: { contacts: [mail('', 'Admin@rof.org.za'), bem], links: ['tuis','wie','donateurs'], reg: ['NPO 041-391','NCRCP 3885'] },
+      kontak: { contacts: [mail('', 'Admin@rof.org.za'), bem], links: ['tuis','wie','donateurs','studente'], reg: ['NPO 041-391','NCRCP 3885','Artikel 18A'] }
+    };
+    const f = FOOT[s.page];
+    const footer = { contacts: f.contacts, reg: f.reg, links: f.links.map(link) };
+
+    const socialTabs = ['Facebook','LinkedIn','Instagram','WhatsApp'].map(label => {
+      const a = s.social === label;
+      return { label, onClick: () => this.setState({ social: label }),
+        border: a ? 'var(--accent)' : 'var(--charcoal-900)', bg: a ? 'var(--rof-red-50)' : 'transparent', color: a ? 'var(--accent)' : 'var(--text-strong)' };
+    });
+    const socialPosts = [1,2,3,4].map(i => s.social + '-plasing ' + i);
+
+    const DON = [
+      { id: 'eenmalig', title: 'Eenmalige skenking', sub: "Maak 'n eenmalige bydrae" },
+      { id: 'herhalend', title: 'Herhalende skenking', sub: 'Maandelikse debietorder' },
+      { id: 'eft', title: 'EFT', sub: 'Absa · Takkode 632 005' },
+      { id: 'snap', title: 'Snapscan', sub: 'Skandeer met jou selfoon' }
+    ];
+    const donateOpts = DON.map(o => {
+      const a = s.donate === o.id;
+      return { ...o, active: a, onClick: () => this.setState({ donate: o.id }),
+        border: a ? 'var(--accent)' : 'var(--line)', bg: a ? 'var(--rof-red-50)' : 'var(--white)', color: 'var(--text-strong)' };
+    });
+
+    const FAQ = [
+      ['Wanneer moet ek aansoek doen?', 'Aansoeke open jaarliks in Julie en sluit einde September vir die volgende studiejaar.'],
+      ["Hoeveel van my lening kan 'n beurs word?", "'n Gedeelte van jou lening kan, op grond van akademiese prestasie, in 'n beurs omskep word."],
+      ['Wat as ek deeltyds studeer?', 'ROF bied ook lenings aan studente wat weens omstandighede deeltyds wil studeer.']
+    ];
+    const faqs = FAQ.map(([q, a], i) => ({ q, a, open: s.faq === i, sign: s.faq === i ? '−' : '+',
+      onClick: () => this.setState({ faq: s.faq === i ? -1 : i }) }));
+
+    const scrollTl = (d) => () => { const el = this.tlRef.current; if (el) el.scrollBy({ left: d * 340, behavior: 'smooth' }); };
+
+    return {
+      isMobile, isDesktop: !isMobile, showMobileMenu: isMobile && s.menuOpen,
+      menuLabel: s.menuOpen ? 'Sluit ×' : 'Kieslys',
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      navItems, footer,
+      isTuis: s.page === 'tuis', isWie: s.page === 'wie', isDonateurs: s.page === 'donateurs', isStudente: s.page === 'studente', isKontak: s.page === 'kontak',
+      goTuis: this.go('tuis'), goStudente: this.go('studente'), goDonateurs: this.go('donateurs'),
+      goSkenk: this.go('donateurs', this.skenkRef), goVennoot: this.go('donateurs', this.vennootRef),
+      skenkRef: this.skenkRef, vennootRef: this.vennootRef, tlRef: this.tlRef,
+      tlPrev: scrollTl(-1), tlNext: scrollTl(1),
+      socialTabs, socialPosts, donateOpts,
+      isFacebook: s.social === 'Facebook', notFacebook: s.social !== 'Facebook',
+      fbSrc: 'https://www.facebook.com/plugins/page.php?href=' + encodeURIComponent('https://www.facebook.com/RapportOnderwysFonds') + '&tabs=timeline&width=500&height=720&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&locale=af_ZA',
+      showPortal: s.donate === 'eenmalig' || s.donate === 'herhalend',
+      portalTitle: s.donate === 'eenmalig' ? 'Eenmalige skenking' : 'Herhalende skenking',
+      portalText: s.donate === 'eenmalig' ? "Maak 'n eenmalige bydrae via ons veilige donasieportaal." : 'Stel \u2019n maandelikse debietorder op via ons veilige donasieportaal.',
+      isEft: s.donate === 'eft', isSnap: s.donate === 'snap',
+      faqs,
+      timeline: [
+        { year: '2003', text: 'ROF gestig as nie-winsgewende weldaadsorganisasie' },
+        { year: '2003–2022', text: 'Honderde studente ondersteun; 750+ aansoeke jaarliks ontvang' },
+        { year: '2023', text: 'ROF vier 20 jaar van impak' },
+        { year: 'Vandag', text: "ROF groei tot 'n belangrike rolspeler in onderwysbefondsing" }
+      ],
+      team: [
+        { name: 'Charl Bloomberg', role: 'Uitvoerende Hoof (CEO)' },
+        { name: 'Jade van der Walt', role: 'Bemarking' },
+        { name: '[Naam]', role: 'Direksie / trustees' }
+      ],
+      benefits: [
+        'Belê in toekomstige onderwysers en versterk onderwys in Suid-Afrika.',
+        "Skep blywende impak deur 'n volhoubare, herlaaibare befondsingsmodel.",
+        'Ondersteun verdienstelike studente deur finansiële hindernisse tot hoër onderwys te verwyder.',
+        "Vennoot met 'n vertroude organisasie met meer as 60 jaar se bewese impak en gesonde bestuur.",
+        'Sien meetbare resultate deur deursigtige verslagdoening, studente-suksesverhale en impakdata.',
+        'Maksimeer jou bydrae met Artikel 18A-belastingvoordele vir kwalifiserende skenkings.',
+        "Word deel van 'n gedeelde missie wat lewens verander en gemeenskappe versterk."
+      ].map((text, i) => ({ n: String(i + 1).padStart(2, '0'), text })),
+      eligibility: [
+        'Student by enige geregistreerde tersiêre onderwysinstelling in Suid-Afrika (privaat of staat)',
+        'Kan Afrikaans lees, skryf, praat en ten volle verstaan',
+        "Handhaaf ten minste 'n jaarlikse gemiddeld van 55–60%",
+        'Deeltydse studente welkom om aansoek te doen, na gelang van omstandighede'
+      ],
+      steps: [
+        { n: 1, title: 'Voltooi die vorm', text: 'Voltooi die aanlyn-aansoekvorm tussen Julie en einde September.' },
+        { n: 2, title: 'Dokumente', text: 'Verseker alle handtekeninge en dokumente is volledig.' },
+        { n: 3, title: 'Bevestiging', text: 'Ontvang bevestiging dat jou aansoek volledig ontvang is.' },
+        { n: 4, title: 'Beurskomitee', text: 'Die Beurskomitee vergader teen einde Oktober.' },
+        { n: 5, title: 'Uitslag', text: 'Ontvang die uitslag van jou aansoek.' }
+      ],
+      enquiryTypes: ['Aansoeke', 'Skenkings', 'Vennootskappe', 'Algemeen'],
+      directContacts: [
+        { dept: 'Administrasie', name: 'Elmari Bezuidenhoudt', detail: 'Admin@rof.org.za · 065 367 3903', note: 'Aansoeke, administrasie, terugbetalings' },
+        { dept: 'Finansies', name: 'Peet van der Merwe', detail: 'Finansies@rof.org.za · 071 733 2535', note: 'Belastingsertifikate' },
+        { dept: 'Skenkings & Donateurs', name: 'Charl Bloomberg / Phil-Marie Roberts', detail: 'Charl@rof.org.za · Philmarie@rof.org.za', note: 'Skenkings, vennootskappe' },
+        { dept: 'Algemene Navrae', name: 'Charl Bloomberg — CEO', detail: 'Charl@rof.org.za', note: 'Kantoor / media' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+:root {
+  /* ROF gebruik lyne, nie skaduwees, om vlakke te skei.
+     Skaduwees kom net voor by opgehefde oorlegte (modaal, keuselys). */
+  --shadow-none: none;
+  --shadow-raised: 0 2px 6px rgba(28, 27, 25, 0.06);
+  --shadow-overlay: 0 24px 60px rgba(28, 27, 25, 0.22);
+  --scrim: rgba(28, 27, 25, 0.55);
+  --photo-overlay: rgba(28, 27, 25, 0.35);
+}
