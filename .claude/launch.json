@@ -4,7 +4,7 @@
     {
       "name": "rof-site",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8080", "--directory", "site"],
+      "runtimeArgs": ["-m", "http.server", "8080", "--directory", "."],
       "port": 8080
     }
   ]
