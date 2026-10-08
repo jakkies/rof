@@ -378,9 +378,7 @@ p { margin: 0; }
   margin-bottom: 16px;
 }
 
-/* ---------- Tuis: CTA + nuusbrief ---------- */
-.cta-row { display: grid; gap: 20px; }
-@media (min-width: 1000px) { .cta-row { grid-template-columns: 2fr 1fr; } }
+/* ---------- Tuis: CTA ---------- */
 .cta-dark { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-end; }
 .cta-dark h2 { flex: 1 1 100%; font-size: clamp(28px, 3.4vw, 38px); line-height: 1.12; letter-spacing: var(--tracking-heading); }
 .cta-dark p { flex: 1 1 220px; font-size: 15px; line-height: 1.6; }
