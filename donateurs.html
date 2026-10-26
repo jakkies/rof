@@ -17,8 +17,8 @@
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preload" href="assets/fonts/playfair-display-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/manrope-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="js/main.js" defer></script>
+  <link rel="stylesheet" href="css/styles.css?v=8">
+  <script src="js/main.js?v=6" defer></script>
 </head>
 
 <body>
@@ -61,8 +61,8 @@
   </header>
 
   <main id="inhoud">
-    <section class="container section--intro grid grid--two">
-      <div>
+    <section class="container section--intro grid grid--two page-hero">
+      <div class="page-hero__copy">
         <div class="rof-label rof-label--accent eyebrow">Hoekom skenk</div>
         <h1 class="h-hero">Jou skenking, <em>ons land se toekoms</em></h1>
         <p class="lead">Wanneer jy aan ROF skenk, ondersteun jy nie net één student nie — jy word deel van 'n volhoubare
@@ -71,33 +71,35 @@
         </p>
         <a class="btn btn--primary" href="#skenk">Skenk Nou</a>
       </div>
-      <div class="placeholder ratio-5-4" role="img" aria-label="Donateur- / impakbeeld · 5:4"><span
-          class="rof-label">Donateur- / impakbeeld · 5:4</span></div>
+      <img class="page-hero__img" src="assets/img/hero-donateurs.jpg" alt="Gegradueerde in rooi akademiese drag met sy diploma in die hand"
+        width="1469" height="1010" fetchpriority="high">
     </section>
 
-    <section class="container section">
-      <h2 class="h-section">Hoekom <em>ROF?</em></h2>
-      <div class="grid grid--cards">
-        <div class="card card--sm"><span class="rof-label rof-label--accent">01</span>
-          <p>Belê in huidige en toekomstige onderwysers en versterk onderwys in Suid-Afrika.</p>
-        </div>
-        <div class="card card--sm"><span class="rof-label rof-label--accent">02</span>
-          <p>Skep 'n blywende impak deur 'n volhoubare, herhalende befondsingsmodel.</p>
-        </div>
-        <div class="card card--sm"><span class="rof-label rof-label--accent">03</span>
-          <p>Ondersteun verdienstelike studente deur finansiële hindernisse tot hoër onderwys te verwyder.</p>
-        </div>
-        <div class="card card--sm"><span class="rof-label rof-label--accent">04</span>
-          <p>Vennoot met 'n vertroude organisasie met meer as 20 jaar se bewese impak en professionele bestuur.</p>
-        </div>
-        <div class="card card--sm"><span class="rof-label rof-label--accent">05</span>
-          <p>Sien meetbare resultate deur deursigtige verslagdoening, studente-suksesverhale en impakdata.</p>
-        </div>
-        <div class="card card--sm"><span class="rof-label rof-label--accent">06</span>
-          <p>Skenkings kwalifiseer vir Artikel 18A belastingsvoordele.</p>
-        </div>
-        <div class="card card--sm"><span class="rof-label rof-label--accent">07</span>
-          <p>Word deel van 'n fonds wat lewens verander en gemeenskappe versterk.</p>
+    <section class="band-dark">
+      <div class="container">
+        <h2 class="h-section">Hoekom <em>ROF?</em></h2>
+        <div class="grid grid--cards">
+          <div class="card card--sm"><span class="rof-label rof-label--accent">01</span>
+            <p>Belê in huidige en toekomstige onderwysers en versterk onderwys in Suid-Afrika.</p>
+          </div>
+          <div class="card card--sm"><span class="rof-label rof-label--accent">02</span>
+            <p>Skep 'n blywende impak deur 'n volhoubare, herhalende befondsingsmodel.</p>
+          </div>
+          <div class="card card--sm"><span class="rof-label rof-label--accent">03</span>
+            <p>Ondersteun verdienstelike studente deur finansiële hindernisse tot hoër onderwys te verwyder.</p>
+          </div>
+          <div class="card card--sm"><span class="rof-label rof-label--accent">04</span>
+            <p>Vennoot met 'n vertroude organisasie met meer as 20 jaar se bewese impak en professionele bestuur.</p>
+          </div>
+          <div class="card card--sm"><span class="rof-label rof-label--accent">05</span>
+            <p>Sien meetbare resultate deur deursigtige verslagdoening, studente-suksesverhale en impakdata.</p>
+          </div>
+          <div class="card card--sm"><span class="rof-label rof-label--accent">06</span>
+            <p>Skenkings kwalifiseer vir Artikel 18A belastingsvoordele.</p>
+          </div>
+          <div class="card card--sm"><span class="rof-label rof-label--accent">07</span>
+            <p>Word deel van 'n fonds wat lewens verander en gemeenskappe versterk.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -112,8 +114,8 @@
           aria-selected="false"><strong>Herhalende skenking</strong><span>Maandelikse debietorder</span></button>
         <button class="donate-opt" type="button" role="tab" id="don-eft" aria-controls="don-panel-eft"
           aria-selected="false"><strong>EFT</strong><span>Absa · Takkode 632 005</span></button>
-        <button class="donate-opt" type="button" role="tab" id="don-snap" aria-controls="don-panel-snap"
-          aria-selected="false"><strong>Snapscan</strong><span>Skandeer met jou selfoon</span></button>
+        <button class="donate-opt" type="button" role="tab" id="don-payfast" aria-controls="don-panel-payfast"
+          aria-selected="false"><strong>PayFast</strong><span>Veilige aanlyn betaling</span></button>
       </div>
       <div class="card donate-panel">
         <div role="tabpanel" id="don-panel-eenmalig" aria-labelledby="don-eenmalig">
@@ -122,7 +124,7 @@
               <div class="donate-panel__title">Eenmalige skenking</div>
               <p>Maak 'n eenmalige bydrae via ons veilige donasieportaal.</p>
             </div>
-            <a class="btn btn--primary btn--lg" href="#">Skenk Nou</a>
+            <button class="btn btn--primary btn--lg" type="button" data-modal-open="skenk-modal">Skenk Nou</button>
           </div>
         </div>
         <div role="tabpanel" id="don-panel-herhalend" aria-labelledby="don-herhalend" hidden>
@@ -131,7 +133,7 @@
               <div class="donate-panel__title">Herhalende skenking</div>
               <p>Stel 'n maandelikse debietorder op via ons veilige donasieportaal.</p>
             </div>
-            <a class="btn btn--primary btn--lg" href="#">Skenk Nou</a>
+            <button class="btn btn--primary btn--lg" type="button" data-modal-open="skenk-modal">Skenk Nou</button>
           </div>
         </div>
         <div role="tabpanel" id="don-panel-eft" aria-labelledby="don-eft" hidden>
@@ -151,14 +153,13 @@
             </div>
           </div>
         </div>
-        <div role="tabpanel" id="don-panel-snap" aria-labelledby="don-snap" hidden>
-          <div class="donate-panel__row" style="justify-content:flex-start;gap:28px">
-            <div class="placeholder ratio-1-1 qr" role="img" aria-label="QR-kode"><span class="rof-label">QR-kode</span>
-            </div>
+        <div role="tabpanel" id="don-panel-payfast" aria-labelledby="don-payfast" hidden>
+          <div class="donate-panel__row">
             <div>
-              <div class="donate-panel__title">Snapscan</div>
-              <p>Skandeer om direk vanaf jou selfoon te skenk.</p>
+              <div class="donate-panel__title">PayFast</div>
+              <p>Skenk veilig aanlyn via PayFast. Jy kies self die bedrag en betaal op PayFast se beveiligde betaalblad.</p>
             </div>
+            <button class="btn btn--primary btn--lg" type="button" data-modal-open="payfast-modal">Skenk met PayFast</button>
           </div>
         </div>
       </div>
@@ -166,6 +167,56 @@
         is belastingaftrekbaar. Kontak <a href="mailto:finansies@rof.org.za"
           style="font-weight:700">Finansies@rof.org.za</a> vir jou sertifikaat.</p>
     </section>
+
+    <!-- Skenk Nou-ligkas: die HubSpot-vorm word eers gelaai wanneer die ligkas oopmaak. -->
+    <dialog class="modal" id="skenk-modal" aria-labelledby="skenk-modal-title">
+      <div class="modal__head">
+        <h2 id="skenk-modal-title">Skenk <em>nou</em></h2>
+        <button class="icon-btn modal__close" type="button" data-modal-close aria-label="Sluit">×</button>
+      </div>
+      <div class="modal__body" id="skenk-form" data-hs-portal="147628845"
+        data-hs-form="67b5c028-8871-4f16-a730-797335f006bb" data-hs-region="eu1">
+        <p class="modal__status">Laai vorm…</p>
+      </div>
+    </dialog>
+
+    <!-- Word 'n Vennoot-ligkas: die HubSpot-vorm word eers gelaai wanneer die ligkas oopmaak. -->
+    <dialog class="modal" id="vennoot-modal" aria-labelledby="vennoot-modal-title">
+      <div class="modal__head">
+        <h2 id="vennoot-modal-title">Word 'n <em>vennoot</em></h2>
+        <button class="icon-btn modal__close" type="button" data-modal-close aria-label="Sluit">×</button>
+      </div>
+      <div class="modal__body" id="vennoot-form" data-hs-portal="147628845"
+        data-hs-form="68de722f-068b-4c5a-ba17-7d94e5f22e45" data-hs-region="eu1">
+        <p class="modal__status">Laai vorm…</p>
+      </div>
+    </dialog>
+
+    <!-- PayFast-ligkas: die vorm stuur die skenker na PayFast se beveiligde betaalblad. -->
+    <dialog class="modal" id="payfast-modal" aria-labelledby="payfast-modal-title">
+      <div class="modal__head">
+        <h2 id="payfast-modal-title">Skenk met <em>PayFast</em></h2>
+        <button class="icon-btn modal__close" type="button" data-modal-close aria-label="Sluit">×</button>
+      </div>
+      <div class="modal__body">
+        <form class="payfast-form" name="PayFastPayNowForm" action="https://payment.payfast.io/eng/process" method="post">
+          <input required type="hidden" name="cmd" value="_paynow">
+          <input required type="hidden" name="receiver" pattern="[0-9]" value="32829539">
+          <input required type="hidden" name="item_name" maxlength="255" value="Donasie">
+          <label class="field" for="PayFastAmount">
+            <span class="field__label" id="PayFastAmountLabel">Bedrag<span class="req" aria-hidden="true"> *</span></span>
+            <span class="amount-input">
+              <span class="amount-input__prefix" aria-hidden="true">R</span>
+              <input class="input" required id="PayFastAmount" type="number" step=".01" name="amount" min="5.00"
+                placeholder="5.00" value="100" inputmode="decimal">
+            </span>
+            <span class="field__hint">Minimum R5,00.</span>
+          </label>
+          <button class="btn btn--primary btn--lg btn--block" type="submit">Skenk Nou <span aria-hidden="true">→</span></button>
+          <p class="payfast-note">Jy word na PayFast se beveiligde betaalblad gestuur om die betaling te voltooi.</p>
+        </form>
+      </div>
+    </dialog>
 
     <section class="container section" id="vennoot">
       <div class="panel-dark partner">
@@ -175,7 +226,7 @@
             SVI-program, trust of stigting.</p>
         </div>
         <div class="btn-row">
-          <a class="btn btn--primary" href="kontak.html">Word 'n Vennoot</a>
+          <button class="btn btn--primary" type="button" data-modal-open="vennoot-modal">Word 'n Vennoot</button>
           <a class="btn btn--inverse" href="#">Laai Vennootskap-brosjure Af</a>
         </div>
       </div>
@@ -215,9 +266,16 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <img src="assets/rof-logo-footer.png" alt="Rapport Onderwysfonds" width="90" height="51" loading="lazy">
+          <img src="assets/rapport-onderwysfonds-logo.webp" alt="Rapport Onderwysfonds" width="220" height="68" loading="lazy">
           <p class="footer-about">Rapport Onderwysfonds belê sedert 2003 in Suid-Afrika se volgende geslag onderwysers.
           </p>
+          <div class="socials">
+            <a class="social-btn" href="https://www.facebook.com/RapportOnderwysFonds" target="_blank" rel="noopener"
+              aria-label="Facebook">f</a>
+            <a class="social-btn" href="#" aria-label="LinkedIn">in</a>
+            <a class="social-btn" href="#" aria-label="Instagram">ig</a>
+            <a class="social-btn" href="#" aria-label="WhatsApp">wa</a>
+          </div>
         </div>
         <div>
           <div class="footer-title">Kontak per afdeling</div>
@@ -247,16 +305,12 @@
             <span>PBO 93 000 4228</span>
             <span>Artikel 18A geregistreer</span>
           </div>
-          <div class="socials">
-            <a class="social-btn" href="https://www.facebook.com/RapportOnderwysFonds" target="_blank" rel="noopener"
-              aria-label="Facebook">f</a>
-            <a class="social-btn" href="#" aria-label="LinkedIn">in</a>
-            <a class="social-btn" href="#" aria-label="Instagram">ig</a>
-            <a class="social-btn" href="#" aria-label="WhatsApp">wa</a>
-          </div>
         </div>
       </div>
-      <div class="footer-bottom">© <span data-year>2026</span> Rapport Onderwysfonds. Alle regte voorbehou.</div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> Rapport Onderwysfonds. Alle regte voorbehou.</span>
+        <a href="assets/docs/rof-paia-manual.pdf" target="_blank" rel="noopener">PAIA Manual</a>
+      </div>
     </div>
   </footer>
 </body>

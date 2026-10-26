@@ -17,8 +17,8 @@
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preload" href="assets/fonts/playfair-display-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/manrope-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="js/main.js" defer></script>
+  <link rel="stylesheet" href="css/styles.css?v=8">
+  <script src="js/main.js?v=6" defer></script>
 </head>
 
 <body>
@@ -124,58 +124,58 @@
 
     <section class="container section section--end social">
       <h2>Volg ons <em>nuutste</em> nuus en stories</h2>
-      <p>Ons kanale werk outomaties by met nuwe plasings.</p>
       <div class="pill-tabs" role="tablist" aria-label="Sosiale media">
         <button class="pill-tab" type="button" role="tab" id="tab-fb" aria-controls="panel-fb"
-          aria-selected="true">Facebook</button>
+          aria-selected="true"><svg class="pill-tab__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h-2.5A4.5 4.5 0 0 0 8 7.5V10H5.5v4H8v7h4v-7h2.5l.5-4h-3V7.5a.5.5 0 0 1 .5-.5H15z"/></svg>Facebook</button>
         <button class="pill-tab" type="button" role="tab" id="tab-li" aria-controls="panel-li"
-          aria-selected="false">LinkedIn</button>
+          aria-selected="false"><svg class="pill-tab__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="4" height="12"/><circle cx="5" cy="4.5" r="2"/><path d="M11 21V9h4v2a4 4 0 0 1 7 3v7h-4v-6a2 2 0 0 0-4 0v6z"/></svg>LinkedIn</button>
         <button class="pill-tab" type="button" role="tab" id="tab-ig" aria-controls="panel-ig"
-          aria-selected="false">Instagram</button>
+          aria-selected="false"><svg class="pill-tab__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6"/></svg>Instagram</button>
         <button class="pill-tab" type="button" role="tab" id="tab-wa" aria-controls="panel-wa"
-          aria-selected="false">WhatsApp</button>
+          aria-selected="false"><svg class="pill-tab__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8 19z"/></svg>WhatsApp</button>
       </div>
       <div role="tabpanel" id="panel-fb" aria-labelledby="tab-fb">
-        <div class="fb-embed">
-          <iframe title="Rapport Onderwysfonds op Facebook" loading="lazy"
-            data-src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FRapportOnderwysFonds&amp;tabs=timeline&amp;width=500&amp;height=720&amp;small_header=true&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=false&amp;locale=af_ZA"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        <!--
+          FACEBOOK-PLASINGS: plak die skakel van elke plasing in data-href.
+          Kry die skakel op Facebook: klik op die plasing se datum/tyd (of "..." > "Embed")
+          en kopieer die adres, bv. https://www.facebook.com/RapportOnderwysFonds/posts/pfbid0...
+          Reels werk ook, bv. https://www.facebook.com/reel/1425236243112147
+          Facebook se "share"-kortskakels (facebook.com/share/...) werk NIE; maak dit eers oop en kopieer die volle adres.
+          'n Leë data-href wys 'n plekhouer.
+        -->
+        <div class="feed-grid">
+          <div class="feed-card" data-fb-post
+            data-href="https://www.facebook.com/reel/1425236243112147"></div>
+          <div class="feed-card" data-fb-post
+            data-href="https://www.facebook.com/RapportOnderwysFonds/posts/pfbid01R1h24K588WMJgEj9nwYPcHLikoZqjgb8Bto9VMAhXqXpatmRVxBbp8oqJeqvW4ol"></div>
+          <div class="feed-card" data-fb-post
+            data-href="https://www.facebook.com/RapportOnderwysFonds/posts/pfbid0uuF8hRYoRYb6rciocgsTsbq6oax5Y1oqMTdWa2dfRW1hQMmUZzvSdZuUSKwmRgDyl"></div>
+          <div class="feed-card" data-fb-post
+            data-href="https://www.facebook.com/reel/29434276109501772"></div>
         </div>
       </div>
       <div role="tabpanel" id="panel-li" aria-labelledby="tab-li" hidden>
-        <div class="posts">
-          <div class="placeholder ratio-4-5" role="img" aria-label="LinkedIn-plasing 1"><span
-              class="rof-label">LinkedIn-plasing 1</span></div>
-          <div class="placeholder ratio-4-5" role="img" aria-label="LinkedIn-plasing 2"><span
-              class="rof-label">LinkedIn-plasing 2</span></div>
-          <div class="placeholder ratio-4-5" role="img" aria-label="LinkedIn-plasing 3"><span
-              class="rof-label">LinkedIn-plasing 3</span></div>
-          <div class="placeholder ratio-4-5" role="img" aria-label="LinkedIn-plasing 4"><span
-              class="rof-label">LinkedIn-plasing 4</span></div>
+        <div class="feed-grid">
+          <div class="feed-card placeholder" role="img" aria-label="LinkedIn-plasing 1"><span class="rof-label">LinkedIn-plasing 1</span></div>
+          <div class="feed-card placeholder" role="img" aria-label="LinkedIn-plasing 2"><span class="rof-label">LinkedIn-plasing 2</span></div>
+          <div class="feed-card placeholder" role="img" aria-label="LinkedIn-plasing 3"><span class="rof-label">LinkedIn-plasing 3</span></div>
+          <div class="feed-card placeholder" role="img" aria-label="LinkedIn-plasing 4"><span class="rof-label">LinkedIn-plasing 4</span></div>
         </div>
       </div>
       <div role="tabpanel" id="panel-ig" aria-labelledby="tab-ig" hidden>
-        <div class="posts">
-          <div class="placeholder ratio-4-5" role="img" aria-label="Instagram-plasing 1"><span
-              class="rof-label">Instagram-plasing 1</span></div>
-          <div class="placeholder ratio-4-5" role="img" aria-label="Instagram-plasing 2"><span
-              class="rof-label">Instagram-plasing 2</span></div>
-          <div class="placeholder ratio-4-5" role="img" aria-label="Instagram-plasing 3"><span
-              class="rof-label">Instagram-plasing 3</span></div>
-          <div class="placeholder ratio-4-5" role="img" aria-label="Instagram-plasing 4"><span
-              class="rof-label">Instagram-plasing 4</span></div>
+        <div class="feed-grid">
+          <div class="feed-card placeholder" role="img" aria-label="Instagram-plasing 1"><span class="rof-label">Instagram-plasing 1</span></div>
+          <div class="feed-card placeholder" role="img" aria-label="Instagram-plasing 2"><span class="rof-label">Instagram-plasing 2</span></div>
+          <div class="feed-card placeholder" role="img" aria-label="Instagram-plasing 3"><span class="rof-label">Instagram-plasing 3</span></div>
+          <div class="feed-card placeholder" role="img" aria-label="Instagram-plasing 4"><span class="rof-label">Instagram-plasing 4</span></div>
         </div>
       </div>
       <div role="tabpanel" id="panel-wa" aria-labelledby="tab-wa" hidden>
-        <div class="posts">
-          <div class="placeholder ratio-4-5" role="img" aria-label="WhatsApp-plasing 1"><span
-              class="rof-label">WhatsApp-plasing 1</span></div>
-          <div class="placeholder ratio-4-5" role="img" aria-label="WhatsApp-plasing 2"><span
-              class="rof-label">WhatsApp-plasing 2</span></div>
-          <div class="placeholder ratio-4-5" role="img" aria-label="WhatsApp-plasing 3"><span
-              class="rof-label">WhatsApp-plasing 3</span></div>
-          <div class="placeholder ratio-4-5" role="img" aria-label="WhatsApp-plasing 4"><span
-              class="rof-label">WhatsApp-plasing 4</span></div>
+        <div class="feed-grid">
+          <div class="feed-card placeholder" role="img" aria-label="WhatsApp-plasing 1"><span class="rof-label">WhatsApp-plasing 1</span></div>
+          <div class="feed-card placeholder" role="img" aria-label="WhatsApp-plasing 2"><span class="rof-label">WhatsApp-plasing 2</span></div>
+          <div class="feed-card placeholder" role="img" aria-label="WhatsApp-plasing 3"><span class="rof-label">WhatsApp-plasing 3</span></div>
+          <div class="feed-card placeholder" role="img" aria-label="WhatsApp-plasing 4"><span class="rof-label">WhatsApp-plasing 4</span></div>
         </div>
       </div>
     </section>
@@ -213,9 +213,16 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <img src="assets/rof-logo-footer.png" alt="Rapport Onderwysfonds" width="90" height="51" loading="lazy">
+          <img src="assets/rapport-onderwysfonds-logo.webp" alt="Rapport Onderwysfonds" width="220" height="68" loading="lazy">
           <p class="footer-about">Rapport Onderwysfonds belê sedert 2003 in Suid-Afrika se volgende geslag onderwysers.
           </p>
+          <div class="socials">
+            <a class="social-btn" href="https://www.facebook.com/RapportOnderwysFonds" target="_blank" rel="noopener"
+              aria-label="Facebook">f</a>
+            <a class="social-btn" href="#" aria-label="LinkedIn">in</a>
+            <a class="social-btn" href="#" aria-label="Instagram">ig</a>
+            <a class="social-btn" href="#" aria-label="WhatsApp">wa</a>
+          </div>
         </div>
         <div>
           <div class="footer-title">Kontak per afdeling</div>
@@ -245,16 +252,12 @@
             <span>PBO 93 000 4228</span>
             <span>Artikel 18A geregistreer</span>
           </div>
-          <div class="socials">
-            <a class="social-btn" href="https://www.facebook.com/RapportOnderwysFonds" target="_blank" rel="noopener"
-              aria-label="Facebook">f</a>
-            <a class="social-btn" href="#" aria-label="LinkedIn">in</a>
-            <a class="social-btn" href="#" aria-label="Instagram">ig</a>
-            <a class="social-btn" href="#" aria-label="WhatsApp">wa</a>
-          </div>
         </div>
       </div>
-      <div class="footer-bottom">© <span data-year>2026</span> Rapport Onderwysfonds. Alle regte voorbehou.</div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> Rapport Onderwysfonds. Alle regte voorbehou.</span>
+        <a href="assets/docs/rof-paia-manual.pdf" target="_blank" rel="noopener">PAIA Manual</a>
+      </div>
     </div>
   </footer>
 </body>

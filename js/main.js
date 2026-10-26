@@ -51,6 +51,103 @@
     if (initial) select(initial);
   });
 
+  /* ---------- Facebook-plasings ----------
+     Elke .feed-card[data-fb-post] met 'n data-href word 'n Facebook-plasing.
+     Facebook lewer dit teen 350px breed; ons skaal dit om die kaart te vul. */
+  var FB_WIDTH = 350;
+  var fit = function (card) {
+    card.style.setProperty('--s', String(card.clientWidth / FB_WIDTH));
+  };
+  var ro = 'ResizeObserver' in window
+    ? new ResizeObserver(function (entries) { entries.forEach(function (e) { fit(e.target); }); })
+    : null;
+  document.querySelectorAll('[data-fb-post]').forEach(function (card, i) {
+    var href = (card.getAttribute('data-href') || '').trim();
+    if (!href) {
+      card.classList.add('placeholder');
+      card.setAttribute('role', 'img');
+      card.setAttribute('aria-label', 'Facebook-plasing ' + (i + 1));
+      card.innerHTML = '<span class="rof-label">Facebook-plasing ' + (i + 1) + '</span>';
+      return;
+    }
+    var frame = document.createElement('iframe');
+    frame.title = 'Facebook-plasing ' + (i + 1) + ' van Rapport Onderwysfonds';
+    frame.loading = 'lazy';
+    frame.scrolling = 'no';
+    frame.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
+    // Reels en video's gebruik Facebook se videospeler; gewone plasings die plasing-inprop.
+    var plugin = /\/(reel|videos?)\//.test(href) ? 'video' : 'post';
+    frame.src = 'https://www.facebook.com/plugins/' + plugin + '.php?href=' + encodeURIComponent(href) +
+      '&show_text=true&width=' + FB_WIDTH + '&locale=af_ZA';
+    card.appendChild(frame);
+    fit(card);
+    if (ro) ro.observe(card); else window.addEventListener('resize', function () { fit(card); });
+  });
+
+  /* ---------- Ligkas (modaal) ----------
+     Knoppies met data-modal-open="<id>" maak die <dialog> oop. As die dialoog
+     'n [data-hs-form]-element bevat, word die HubSpot-vorm eers dan gelaai. */
+  var hsScript = null;
+  var loadHubSpot = function () {
+    if (hsScript) return hsScript;
+    hsScript = new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = 'https://js-eu1.hsforms.net/forms/embed/v2.js';
+      s.charset = 'utf-8';
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+    return hsScript;
+  };
+  // HubSpot teken die vorm in 'n iframe op dieselfde oorsprong; ons sit ons eie
+  // stylblad (css/hs-form.css) daarin sodat dit soos die res van die webwerf lyk.
+  var HS_CSS = new URL('css/hs-form.css?v=2', document.baseURI).href;
+  var styleHubSpotForm = function (target) {
+    var frame = target.querySelector('iframe');
+    var doc = null;
+    try { doc = frame ? frame.contentDocument : null; } catch (e) { doc = null; }
+    if (!doc || !doc.head || doc.getElementById('rof-hs-css')) return;
+    var link = doc.createElement('link');
+    link.id = 'rof-hs-css';
+    link.rel = 'stylesheet';
+    link.href = HS_CSS;
+    doc.head.appendChild(link);
+  };
+  var mountForm = function (target) {
+    if (target.getAttribute('data-hs-loaded')) return;
+    target.setAttribute('data-hs-loaded', '1');
+    loadHubSpot().then(function () {
+      target.innerHTML = '';
+      window.hbspt.forms.create({
+        portalId: target.getAttribute('data-hs-portal'),
+        formId: target.getAttribute('data-hs-form'),
+        region: target.getAttribute('data-hs-region'),
+        target: '#' + target.id,
+        onFormReady: function () { styleHubSpotForm(target); }
+      });
+    }).catch(function () {
+      target.removeAttribute('data-hs-loaded');
+      target.innerHTML = '<p class="modal__status">Die vorm kon nie gelaai word nie. Probeer weer, of e-pos <a href="mailto:charl@rof.org.za">Charl@rof.org.za</a>.</p>';
+    });
+  };
+  document.querySelectorAll('[data-modal-open]').forEach(function (btn) {
+    var dialog = document.getElementById(btn.getAttribute('data-modal-open'));
+    if (!dialog || typeof dialog.showModal !== 'function') return;
+    btn.addEventListener('click', function () {
+      dialog.showModal();
+      var form = dialog.querySelector('[data-hs-form]');
+      if (form) mountForm(form);
+    });
+  });
+  document.querySelectorAll('dialog.modal').forEach(function (dialog) {
+    dialog.querySelectorAll('[data-modal-close]').forEach(function (b) {
+      b.addEventListener('click', function () { dialog.close(); });
+    });
+    // Klik op die donker agtergrond sluit die ligkas.
+    dialog.addEventListener('click', function (e) { if (e.target === dialog) dialog.close(); });
+  });
+
   /* ---------- Gereelde vrae ---------- */
   var faqButtons = document.querySelectorAll('.faq__q');
   faqButtons.forEach(function (btn) {

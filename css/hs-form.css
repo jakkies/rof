@@ -1,0 +1,133 @@
+/* Style vir HubSpot-vorms (v2-inbedding) sodat hulle soos die webwerf se vorms lyk.
+   Hierdie lêer word deur js/main.js in die vorm se iframe ingespuit.
+   HubSpot stuur sy eie style saam, vandaar die !important. */
+@import "fonts.css";
+@import "tokens.css";
+
+html, body {
+  margin: 0 !important;
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  color: var(--text-strong) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hs-form fieldset { max-width: none !important; }
+.hs-form .hs-form-field { margin-bottom: 18px !important; }
+
+.hs-form .hs-form-field > label,
+.hs-form legend.hs-field-desc {
+  display: block !important;
+  font-family: var(--font-sans) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--text-strong) !important;
+  margin-bottom: 7px !important;
+}
+.hs-form .hs-form-required { color: var(--accent) !important; margin-left: 2px; }
+
+.hs-form .hs-input:not([type="checkbox"]):not([type="radio"]) {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  min-height: var(--tap-min) !important;
+  padding: 14px 16px !important;
+  background: var(--white) !important;
+  border: 1.5px solid var(--border-field) !important;
+  border-radius: var(--radius-sm) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 16px !important;
+  color: var(--text-strong) !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: var(--transition-interactive);
+}
+.hs-form .hs-input:focus { border-color: var(--accent) !important; box-shadow: var(--focus-ring) !important; }
+.hs-form .hs-input.invalid.error { border-color: var(--border-error) !important; background: var(--accent-soft) !important; }
+.hs-form textarea.hs-input { min-height: 120px !important; resize: vertical; }
+.hs-form select.hs-input {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  padding-right: 40px !important;
+  background-image: linear-gradient(45deg, transparent 50%, var(--charcoal-900) 50%), linear-gradient(135deg, var(--charcoal-900) 50%, transparent 50%) !important;
+  background-position: calc(100% - 20px) calc(50% + 2px), calc(100% - 14px) calc(50% + 2px) !important;
+  background-size: 6px 6px, 6px 6px !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Merkblokkies en radioknoppies */
+.hs-form .inputs-list { list-style: none !important; padding: 0 !important; margin: 0 !important; }
+.hs-form .inputs-list label,
+.hs-form .hs-form-booleancheckbox-display {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  color: var(--text-strong) !important;
+  cursor: pointer;
+}
+.hs-form .inputs-list label > span { margin-left: 0 !important; display: block; }
+.hs-form input[type="checkbox"],
+.hs-form input[type="radio"] {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 2px 0 0 !important;
+  flex: none;
+  accent-color: var(--accent);
+}
+
+/* Regs- en privaatheidsteks */
+.hs-form .legal-consent-container,
+.hs-form .legal-consent-container p,
+.hs-form .hs-richtext,
+.hs-form .hs-richtext p {
+  font-family: var(--font-sans) !important;
+  font-size: 13.5px !important;
+  line-height: 1.55 !important;
+  color: var(--text-body) !important;
+}
+.hs-form .legal-consent-container a,
+.hs-form .hs-richtext a { color: var(--accent) !important; }
+
+/* Foute */
+.hs-form .hs-error-msgs { list-style: none !important; padding: 0 !important; margin: 6px 0 0 !important; }
+.hs-form .hs-error-msg,
+.hs-form .hs-error-msgs label {
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  color: var(--danger-600) !important;
+}
+
+/* Knoppie — soos .btn--primary */
+.hs-form .hs-submit { margin-top: 8px; }
+.hs-form .hs-button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min) !important;
+  padding: 14px 30px !important;
+  border: 1.5px solid transparent !important;
+  border-radius: var(--radius-pill) !important;
+  background: var(--surface-accent) !important;
+  color: var(--text-on-accent) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  cursor: pointer;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  transition: var(--transition-interactive);
+}
+.hs-form .hs-button:hover { background: var(--accent-hover) !important; }
+.hs-form .hs-button:focus-visible { outline: none; box-shadow: var(--focus-ring) !important; }
+.hs-form .hs-button:active { transform: translateY(1px); }
+
+/* Bedankingsboodskap na indiening */
+.submitted-message {
+  font-family: var(--font-sans) !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  color: var(--text-strong) !important;
+}
