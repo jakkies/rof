@@ -719,7 +719,6 @@ html:has(dialog.modal[open]) { overflow: hidden; }
 /* ---------- Bladsy-hero met beeld wat op die volgende band rus ---------- */
 .page-hero { align-items: end; }
 .page-hero__copy { align-self: center; padding-bottom: clamp(40px, 6vw, 72px); }
-.page-hero__img { align-self: end; width: 100%; }
 @media (max-width: 899px) { .page-hero__copy { padding-bottom: 8px; } }
 
 /* ---------- Donker band ---------- */
