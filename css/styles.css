@@ -573,8 +573,8 @@ ul.values { padding: 0; margin: 0; }
 .partner h2 { font-size: clamp(28px, 3.4vw, 38px); line-height: 1.12; margin-bottom: 14px; }
 .partner p { font-size: 16px; line-height: 1.65; max-width: 50ch; }
 
-.testimonial .placeholder { max-width: 340px; width: 100%; }
-.testimonial .quote { font-size: clamp(22px, 2.8vw, 30px); line-height: 1.25; margin: 0; }
+.testimonial .story { max-width: 900px; }
+.testimonial .quote { font-size: clamp(20px, 2.2vw, 26px); line-height: 1.4; margin: 0; text-wrap: pretty; }
 
 /* ---------- Studente ---------- */
 .check-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 24px; display: flex; gap: 14px; align-items: flex-start; }

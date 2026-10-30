@@ -26,7 +26,7 @@
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preload" href="assets/fonts/playfair-display-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/manrope-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/styles.css?v=16">
+  <link rel="stylesheet" href="css/styles.css?v=17">
   <script src="js/main.js?v=6" defer></script>
 </head>
 
@@ -137,7 +137,10 @@
               <div class="donate-panel__title">Eenmalige skenking</div>
               <p>Maak 'n eenmalige bydrae via ons veilige donasieportaal.</p>
             </div>
-            <button class="btn btn--primary btn--lg" type="button" data-modal-open="skenk-modal">Skenk Nou</button>
+            <div class="btn-row">
+              <button class="btn btn--primary btn--lg" type="button" data-modal-open="skenk-modal">Skenk Nou</button>
+              <button class="btn btn--secondary btn--lg" type="button" data-modal-open="payfast-modal">Skenk met PayFast</button>
+            </div>
           </div>
         </div>
         <div role="tabpanel" id="don-panel-herhalend" aria-labelledby="don-herhalend" hidden>
@@ -146,7 +149,10 @@
               <div class="donate-panel__title">Herhalende skenking</div>
               <p>Stel 'n maandelikse debietorder op via ons veilige donasieportaal.</p>
             </div>
-            <button class="btn btn--primary btn--lg" type="button" data-modal-open="skenk-modal">Skenk Nou</button>
+            <div class="btn-row">
+              <button class="btn btn--primary btn--lg" type="button" data-modal-open="skenk-modal">Skenk Nou</button>
+              <button class="btn btn--secondary btn--lg" type="button" data-modal-open="payfast-modal">Skenk met PayFast</button>
+            </div>
           </div>
         </div>
         <div role="tabpanel" id="don-panel-eft" aria-labelledby="don-eft" hidden>
@@ -245,14 +251,15 @@
       </div>
     </section>
 
-    <section class="container section split testimonial" style="padding-bottom: 50px;">
-      <div class="placeholder ratio-1-1" role="img" aria-label="Donateurfoto · 1:1"><span class="rof-label">Donateurfoto
-          · 1:1</span></div>
+    <section class="container section testimonial" style="padding-bottom: 50px;">
       <figure class="story" style="margin:0">
         <span class="badge">Getuigskrif</span>
-        <blockquote class="quote" style="margin:0">"[Getuigskrif van 'n donateur of vennoot oor hoe hulle skenking
-          studente se lewens verander het.]"</blockquote>
-        <figcaption class="rof-label">[Naam · Organisasie]</figcaption>
+        <blockquote class="quote" style="margin:0">“Ons glo dat die toekoms van ons land in die klaskamer begin. Deur die
+          Rapport Onderwysfonds te ondersteun, belê ons nie net in die drome van jong onderwysstudente nie, maar ook in
+          die duisende leerders wie se lewens hulle eendag gaan aanraak. Dit is vir ons besonders om deel te wees van ’n
+          organisasie wat nie net finansiële ondersteuning bied nie, maar werklik ’n blywende verskil in die onderwys
+          maak.”</blockquote>
+        <figcaption class="rof-label">Donateur - Anoniem</figcaption>
       </figure>
     </section>
 
