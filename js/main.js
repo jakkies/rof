@@ -138,6 +138,24 @@
       dialog.showModal();
       var form = dialog.querySelector('[data-hs-form]');
       if (form) mountForm(form);
+      // Nuwer HubSpot-inbedding (.hs-form-frame): laai die skrip eers wanneer die ligkas oopmaak.
+      var frame = dialog.querySelector('[data-hs-frame-src]');
+      if (frame && !frame.getAttribute('data-hs-loaded')) {
+        frame.setAttribute('data-hs-loaded', '1');
+        var sc = document.createElement('script');
+        sc.src = frame.getAttribute('data-hs-frame-src');
+        sc.defer = true;
+        document.head.appendChild(sc);
+        // Wys "Laai vorm…" totdat HubSpot se vorm sigbaar is (dit kan 'n paar sekondes neem).
+        var status = frame.querySelector('[data-hs-status]');
+        if (status) {
+          var tries = 0;
+          var poll = setInterval(function () {
+            var f = frame.querySelector('.hs-form-frame iframe');
+            if ((f && f.offsetHeight > 50) || ++tries > 100) { status.remove(); clearInterval(poll); }
+          }, 300);
+        }
+      }
     });
   });
   document.querySelectorAll('dialog.modal').forEach(function (dialog) {

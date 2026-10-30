@@ -27,7 +27,7 @@
   <link rel="preload" href="assets/fonts/playfair-display-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/manrope-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/styles.css?v=17">
-  <script src="js/main.js?v=6" defer></script>
+  <script src="js/main.js?v=8" defer></script>
 </head>
 
 <body>
@@ -145,9 +145,23 @@
         </li>
       </ol>
       <div style="margin-top:24px">
-        <a class="btn btn--primary btn--lg" href="#">Doen Nou Aansoek<span aria-hidden="true">→</span></a>
+        <button class="btn btn--primary btn--lg" type="button" data-modal-open="aansoek-modal">Doen Nou Aansoek <span aria-hidden="true">→</span></button>
       </div>
     </section>
+
+    <!-- Aansoek-ligkas: dieselfde HubSpot-vorm as op Kontak Ons; die skrip word eers gelaai wanneer die ligkas oopmaak. -->
+    <dialog class="modal" id="aansoek-modal" aria-labelledby="aansoek-modal-title">
+      <div class="modal__head">
+        <h2 id="aansoek-modal-title">Doen <em>aansoek</em></h2>
+        <button class="icon-btn modal__close" type="button" data-modal-close aria-label="Sluit">×</button>
+      </div>
+      <div class="modal__body" data-hs-frame-src="https://js-eu1.hsforms.net/forms/embed/147628845.js">
+        <p class="modal__status" data-hs-status>Laai vorm…</p>
+        <div class="hs-form-frame" data-region="eu1" data-form-id="85044b76-7638-48ac-9b08-1c3ee100ab1a"
+          data-portal-id="147628845"></div>
+      </div>
+    </dialog>
+
 
     <section class="container section faq-wrap" style="padding-bottom: 50px;">
       <div>
